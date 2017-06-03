@@ -1,0 +1,462 @@
+/*
+ * @function: message component
+ * @author: cygnet
+ * @date: 2017-05-09
+ * @version: 2.0.0
+ */
+(function(window){
+	var doc = window.document;
+	var msgBox = {
+
+		// 
+		alert: function(title, txt, okTxt, fn){
+			new Dialog({
+				kind: 1,
+				type: 1,
+				txt: txt,   // 显示的内容文本
+				title: title, // 显示的标题
+				ensureTxt: okTxt,  // 确定按钮显示的文本
+				cb: fn || null,  // 回调函数
+			})
+		},
+
+		// 删除询问框
+		del: function(title, txt, okTxt, noTxt, fn){
+			new Dialog({
+				kind: 1,
+				type: 2, 
+				txt: txt,
+				title: title,
+				ensureTxt: okTxt,
+				cancelTxt: noTxt,
+				cb: fn || null
+			})
+		},
+
+		// 警告框
+		warn: function(title, txt, okTxt, noTxt, fn){
+			new Dialog({
+				kind: 1,
+				type: 3,
+				txt: txt,
+				title: title,
+				ensureTxt: okTxt,
+				cancelTxt: noTxt,
+				cb: fn || null
+			})
+		},
+
+		// 确认框
+		sure: function(title, txt, okTxt, noTxt, fn){
+			new Dialog({
+				kind: 1,
+				type: 4,
+				txt: txt,
+				title: title,
+				ensureTxt: okTxt,
+				cancelTxt: noTxt,
+				cb: fn || null
+			})
+		},
+
+		// 成功框
+		success: function(title, txt, okTxt, noTxt, fn){
+			new Dialog({
+				kind: 1,
+				type: 5,
+				txt: txt,
+				title: title,
+				ensureTxt: okTxt,
+				cancelTxt: noTxt,
+				cb: fn || null
+			})
+		},
+
+		// 插件下载
+		down: function(title, header, body, btnTxt){
+			new Dialog({
+				kind: 4,
+				title: title,
+				header: header,
+				body: body,
+				btnTxt: btnTxt,
+			})
+			    // <div>
+			    //     <iframe id="downLoadIframe" class="msg-down-iframe" frameborder="0" border="0" scrolling="no"></iframe>
+			    //     <!-- 下载视频插件 -->
+			    //     <div class="msg-down-wrap">
+			    //         <!--遮盖层-->
+			    //         <div class="msg-down-shadow"></div>
+			    //         <!--下載区-->
+			    //         <div class="msg-down-area">
+			    //             <!-- 头部标题 -->
+			    //             <div class="msg-down-title" ><!-- 插件下载 -->
+			    //                 <span class="msg-down-close" ng-click="closePluginWin()"></span>
+			    //             </div>
+			    //             <!-- 下载图标样式 -->
+			    //             <div class="msg-down-optimize-outer clearfix">
+					    //         	<span class="msg-down-optimize">
+									// 	<div class="msg-down-icon"></div>
+									// 	<div class="msg-down-explan">
+					    //                     <p class="msg-down-body"><!-- 网页优化插件 --></p>
+					    //                     <p class="msg-down-des"><!-- 提升IE浏览器的页面加载速度、渲染能力以及字体效果 --></p>
+					    //                 </div>
+					    //         	</span>
+			    //             </div>
+			    //             <div class="msg-down-btn">
+			    //                 <a class="msg-down--btn"><!-- 立即下载 --></a>
+			    //             </div>
+			    //         </div>
+			    //     </div>
+			    // </div>
+			    
+		}
+
+	};
+
+	var msgTip = {
+		// 控制只有消失了才能生成
+		//isShow: false,
+
+		// 信息提示
+		info: function(txt){
+			new Dialog({
+				kind: 2,
+				type: 1,
+				txt: txt
+			})
+		},
+
+		// 警告提示
+		warn: function(txt){
+			new Dialog({
+				kind: 2,
+				type: 2,
+				txt: txt
+			})
+		},
+
+		// 成功提示
+		success: function(txt){
+			new Dialog({
+				kind: 2,
+				type: 3,
+				txt: txt
+			})
+		},
+
+		// 失败提示
+		fail: function(txt){
+			new Dialog({
+				kind: 2,
+				type: 4,
+				txt: txt
+			})
+		},
+
+	};
+
+	var msgNotify = {
+		space: 16, 
+		arr: [],
+		alert: function(title, txt, flag){
+			new Dialog({
+				kind: 3,
+				type: 1,
+				title: title,
+				txt: txt,
+				isAutoClose: flag
+			})
+		}
+	};
+
+	function Dialog(obj){
+		// 样式
+		this.name = {
+			// tip class
+			tip: "msg-tip-wrapper",
+			text: "msg-tip-text",
+			animate: "msg-tip-animate",
+			imgs: "msg-tip-img",
+			info: "img/msg/msg_icon_infoTip.png",
+			warn: "img/msg/msg_icon_warnTip.png",
+			suc: "img/msg/msg_icon_sucTip.png",
+			err: "img/msg/msg_icon_errTio.png",
+
+			// box class
+			shadow: "msg-box-shadow",
+			wrapper: "msg-box-wrapper",
+			content: "msg-box-content",
+			header: "msg-box-header",
+			body: "msg-box-body",
+			footer: "msg-box-footer",
+			title: "msg-box-title",
+			close: "msg-box-close",
+			btn: "msg-box-btn",
+			primary: "msg-box-btn-primary",
+			second: "msg-box-btn-second",
+			img: "msg-box-img",
+			del: "msg-box-img-del",
+			sure: "msg-box-img-sure",
+			warns:"msg-box-img-warn",
+			succ: "msg-box-img-suc",
+
+			// notify class
+			notify: "msg-notify",
+			notifyTitle: "msg-notify-title",
+			notifyClose: "msg-notify-close",
+			notifyTxt: "msg-notify-txt",
+
+
+		}
+
+		// 可配置的参数
+		this.config = {
+			width: typeof obj.width === 'number' ? obj.width : 300,
+			txt: obj.txt,
+			title: obj.title,
+			ensureTxt: obj.ensureTxt,
+			cancelTxt: obj.cancelTxt,
+			isAutoClose: obj.isAutoClose || false
+		}
+
+		// 创建父对象
+		this.parentNode = doc.createElement('div');
+
+		// 种类
+		switch(obj.kind){
+			case 1:
+				this.shadow = doc.createElement('div');
+				this.content = doc.createElement('div');
+				var header = doc.createElement('div');
+				var body = doc.createElement('div');
+				var footer = doc.createElement('div');
+				var title = doc.createElement('span');
+				this.close = doc.createElement('span');
+				this.second = doc.createElement('button');
+				this.primary = doc.createElement('button');
+				this.img = doc.createElement('div');
+				var txtNode = doc.createTextNode(this.config.txt);
+				title.innerText = this.config.title;
+				this.primary.innerText = this.config.ensureTxt;
+
+				this.shadow.className = this.name.shadow; 
+				this.parentNode.className = this.name.wrapper;
+				this.content.className = this.name.content;
+				header.className = this.name.header;
+				body.className = this.name.body;
+				footer.className = this.name.footer;
+				title.className = this.name.title;
+				this.close.className = this.name.close;
+				this.second.className = this.name.btn + " " + this.name.second;
+				this.primary.className = this.name.btn + " " + this.name.primary;
+				switch(obj.type){
+					case 2: // del 删除询问框
+						this.img.className = this.name.img + " " + this.name.del;
+						this.second.innerText = this.config.cancelTxt;
+						footer.appendChild(this.second);
+						body.appendChild(this.img);
+						break;
+					case 3: // 警告框
+						this.img.className = this.name.img + " " + this.name.warns;
+						this.second.innerText = this.config.cancelTxt;
+						footer.appendChild(this.second);
+						body.appendChild(this.img);
+						break;
+					case 4:  // 确认框
+						this.img.className = this.name.img + " " + this.name.sure;
+						this.second.innerText = this.config.cancelTxt;
+						footer.appendChild(this.second);
+						body.appendChild(this.img);
+						break;
+					case 5: // 成功框
+						this.img.className = this.name.img + " " + this.name.succ;
+						this.second.innerText = this.config.cancelTxt;
+						footer.appendChild(this.second);
+						body.appendChild(this.img);
+						break;
+				}
+
+				body.appendChild(txtNode);
+				footer.appendChild(this.primary);
+				header.appendChild(title);
+				header.appendChild(this.close);
+				this.content.appendChild(header);
+				this.content.appendChild(body);
+				this.content.appendChild(footer);
+				this.parentNode.appendChild(this.content);
+				doc.body.appendChild(this.shadow);
+
+
+				break;
+			case 2:
+				// if(!msgTip.isShow){
+					// msgTip.isShow = true;
+					// 给父节点添加消息提示
+					this.parentNode.className = this.name.tip;
+					// 创建图片img标签
+					var img = doc.createElement('img');
+					img.className = this.name.imgs;
+					// 添加对应的图片
+					switch(obj.type){
+						case 1:
+							img.src = this.name.info;
+							break;
+						case 2: 
+							img.src = this.name.warn;
+							break;
+						case 3: 
+							img.src = this.name.suc;
+							break;
+						case 4: 
+							img.src = this.name.err;
+							break;
+					}
+					// 创建文本标签
+					var txt = doc.createElement('div');
+					txt.className = this.name.text;
+					// 设置父元素的宽度
+					this.parentNode.style.minWidth = this.config.width + 'px';
+					this.parentNode.style.marginLeft = "-"+ this.config.width / 2 +"px";
+					txt.innerHTML = this.config.txt;
+					// 追加到父元素上面
+					this.parentNode.appendChild(img);
+					this.parentNode.appendChild(txt);
+
+					var that = this;
+					// 执行动画
+					setTimeout(function(){
+						that.parentNode.style.opacity="1";
+						that.parentNode.style.top = "30px";
+					}, 50);
+					setTimeout(function(){
+						that.parentNode.style.opacity="0";
+						that.parentNode.style.top = "-40px";
+					}, 1200);
+					setTimeout(function(){
+						doc.body.removeChild(that.parentNode);
+						//msgTip.isShow = false;
+					}, 1800)
+				//}
+				break;
+			case 3:
+				var title = doc.createElement("span");
+				this.notifyClose = doc.createElement("span");
+				var txt = doc.createElement("p");
+
+				title.className = this.name.notifyTitle;
+				this.notifyClose.className = this.name.notifyClose;
+				txt.className = this.name.notifyTxt;
+				this.parentNode.className = this.name.notify;
+
+				title.innerHTML = this.config.title;
+				this.notifyClose.innerHTML = "×";
+				txt.innerHTML = this.config.txt;
+				this.parentNode.style.width = this.config.width + "px";
+				this.parentNode.style.right = "-" + this.config.width + "px";
+				this.parentNode.style.top = (msgNotify.space + 92) * msgNotify.arr.length + msgNotify.space + 'px';
+				console.log(this.parentNode);
+				this.parentNode.appendChild(title);
+				this.parentNode.appendChild(this.notifyClose);
+				this.parentNode.appendChild(txt);
+				msgNotify.arr.push(this.parentNode);
+				var that = this;
+	 			setTimeout(function(){
+	 				that.parentNode.style.right = "16px";
+	 			}, 100);
+	 			if(this.config.isAutoClose){
+					setTimeout(function(){
+						that.removeNotify();
+					},1500)
+				}
+				break; 
+
+		}
+
+		// 增加元素
+		this.addEle = function(){
+			doc.body.appendChild(this.parentNode);
+		}
+
+		// 增加事件
+		this.addEvent = function(){
+			var that = this;
+			// 添加关闭按钮点击事件
+			this.add(this.close, "click", function(){
+				doc.body.removeChild(that.shadow);
+				doc.body.removeChild(that.parentNode);
+			});
+
+			// 添加确定按钮点击事件
+			this.add(this.primary, "click", function(){
+				obj.cb && obj.cb();
+				doc.body.removeChild(that.shadow);
+				doc.body.removeChild(that.parentNode);
+			});
+
+			// 添加取消按钮点击事件
+			this.add(this.second, "click", function(){
+				doc.body.removeChild(that.shadow);
+				doc.body.removeChild(that.parentNode);
+			});
+
+			// 通知框关闭按钮点击事件
+			this.add(this.notifyClose, "click", function(){
+				that.removeNotify();
+			});
+
+		}
+
+		this.removeNotify = function(){
+			var index = this.inArray(this.parentNode, msgNotify.arr);
+			doc.body.removeChild(this.parentNode);
+			msgNotify.arr.splice(index, 1);
+			for(var i = 0; i < msgNotify.arr.length; i++){
+				msgNotify.arr[i].style.top = (msgNotify.space + 92) * i + msgNotify.space + 'px';
+			}
+		}
+
+		// 添加事件
+		this.add = function(obj, t, fn){
+			var o = (typeof obj === 'string') ? document.getElementById(obj) : obj;
+			if(!o){
+				return;
+			}
+			if(o.addEventListener){
+				o.addEventListener(t,fn,false);
+			}else if(o.attachEvent){
+				o.attachEvent('on' + t,fn);
+			}else{
+				o['on' + t] = fn;
+			}
+		};
+
+		this.inArray = function( elem, arr, i ) {
+			var len;
+			if (arr) {
+				len = arr.length;
+				i = i ? i < 0 ? Math.max( 0, len + i ) : i : 0;
+				for ( ; i < len; i++ ) {
+					// Skip accessing in sparse arrays
+					if ( i in arr && arr[ i ] === elem ) {
+						return i;
+					}
+				}
+			}
+			return -1;
+		};
+
+		// 初始化
+		this.init = function(){
+			this.addEle();
+			this.addEvent();
+		}
+
+		this.init();
+	}
+
+	// 对外提供三个类
+	window.msgBox = msgBox;
+	window.msgTip = msgTip;
+	window.msgNotify = msgNotify;
+})(window)
