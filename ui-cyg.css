@@ -1,0 +1,702 @@
+/**
+ * name: ui frame
+ * date: 2017-01-01;
+ * author: cygnet;
+ * email: cygnet_js@sina.com;
+ * version: 1.0.2;
+ */
+@charset 'UTF-8';
+body{ font-family: 'Microsoft YaHei';}
+/************************************************
+  * Form
+ ************************************************/
+
+/********* radio start ***********/
+.cyg-radio-group{
+    padding: 4px 0;
+}
+.cyg-radio-label{
+    display: inline-block;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+    position: relative;
+}
+.cyg-radio-input{
+    display: none;
+}
+.cyg-radio-span{
+    position: relative;
+}
+.cyg-radio-span:before{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    content: '';
+    vertical-align: -2px;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 100%;
+    background-color: #dcdcdc;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.cyg-radio-span:after{
+    position: absolute;
+    top: 9px;
+    left: 6px;
+    width: 4px;
+    height: 4px;
+    content: '';
+    border-radius: 100%;
+    background-color: gray;
+}
+.cyg-radio-input:checked + span:before{
+    background-color: #20a0ff;
+}
+.cyg-radio-input:checked + span:after{
+    background-color: #fff;
+}
+/********* radio end *************/
+
+/********* checkbox start ***********/
+.cyg-chk-group{
+    padding: 4px 0;
+}
+.cyg-chk-label{
+    display: inline-block;
+    margin: 0px 10px 0 0;
+}
+.cyg-chk-input{
+    display: none;
+}
+.cyg-chk-span{
+    position: relative;
+}
+.cyg-chk-span:before{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    content: '';
+    cursor: pointer;
+    vertical-align: -2px;
+    border: 1px solid rgba(0,0,0,.15);
+    background-color: #dcdcdc;
+    box-sizing: border-box;
+}
+.cyg-chk-input:checked + .cyg-chk-span:before{
+    background-color: #20a0ff;
+}
+.cyg-chk-input:checked + .cyg-chk-span:after{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    box-sizing: content-box;
+    width: 4px;
+    height: 8px;
+    content: '';
+    transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+    transform: rotate(45deg) scaleY(1);
+    transform-origin: center;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-left: 0;
+}
+/********* checkbox end ***********/
+
+/********* input start ***********/
+.cyg-input{
+    font-size: 14px;
+    line-height: 1;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 36px;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    color: #1f2d3d;
+    border: 1px solid #c0ccda;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fff;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+.cyg-input:focus{
+    border: 1px solid #20a0ff;
+}
+.cyg-input-small{
+    width: 100px;
+}
+/********* input end ***********/
+
+/********* switch start ***********/
+.cyg-switch{
+    padding: 5px 0;
+}
+.cyg-switch-span{
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    width: 45px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 25px;
+    background: #dfe5eb;
+}
+.cyg-switch-input{
+    display: none;
+}
+.cyg-switch-span:before{
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    width: 34px;
+    height: 12px;
+    content: '';
+    transition: all ease .2s;
+    border-radius: 25px;
+    background: #c3c3c3;
+}
+.cyg-switch-span:after{
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    content: '';
+    transition: all ease-out .2s;
+    border-radius: 25px;
+    background: #fff;
+}
+.cyg-switch-input:checked + .cyg-switch-span:before{
+    background: #4cc75b;
+}
+.cyg-switch-input:checked + .cyg-switch-span:after{
+    left: 28px;
+}
+/* switch with text  */
+.cyg-switch-txt{
+    position: relative;
+}
+.cyg-switch-txt-span{
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    width: 50px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 25px;
+    background: #dfe5eb;
+}
+.cyg-switch-txt-input{
+    display: none;
+}
+.cyg-switch-txt-span:before{
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 40px;
+    height: 14px;
+    content: '';
+    transition: all ease .2s;
+    border-radius: 25px;
+    background: rgb(255, 73, 73);
+}
+.cyg-switch-txt-span:after{
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    content: '';
+    transition: all ease-out .2s;
+    border-radius: 25px;
+    background: #fff;
+}
+.cyg-switch-txt-input:checked + .cyg-switch-txt-span:before{
+    background: #4cc75b;
+}
+.cyg-switch-txt-input:checked + .cyg-switch-txt-span:after{
+    left: 30px;
+}
+.cyg-switch-txt-open,.cyg-switch-txt-close{
+    font-size: 12px;
+    font-style: normal;
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    color: #fff;
+}
+.cyg-switch-txt-open{
+    display: none;
+}
+.cyg-switch-txt-input:checked ~ .cyg-switch-txt-open{
+    left: 8px;
+    display: inline-block;
+}
+.cyg-switch-txt-input:checked ~ .cyg-switch-txt-close{
+    display: none;
+}
+/********* switch end   ***********/
+
+
+
+/************************************************
+  * basic
+ ************************************************/
+/********* button start   ***********/
+.cyg-btn{
+    font-size: 14px;
+    display: inline-block;
+    padding: 4px 12px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #bfcbd9;
+    border-color: #20a0ff;
+    border-radius: 4px;
+    outline: none;
+    background-color: #20a0ff;
+}
+.cyg-btn:hover,.cyg-btn:focus{
+    background-color: #4db3ff;
+}
+.cyg-btn-tiny{
+    font-size: 12px;
+    padding:2px 4px;
+}
+.cyg-btn-small{
+    font-size: 12px;
+    padding: 3px 8px;
+}
+.cyg-btn-normal{
+    font-size:14px;
+    padding:6px 10px;
+}
+.cyg-btn-big{
+    font-size: 14px;
+    padding: 8px 16px;
+}
+.cyg-btn-huge{
+    font-size: 16px;
+    padding: 8px 20px;
+}
+.cyg-btn-large{
+    font-size: 16px;
+    padding: 10px 24px;
+}
+
+.cyg-default{
+    color: #1f2d3d;
+    border: 1px solid #bfcbd9;
+    background-color: #fff;
+}
+
+.cyg-default:hover,.cyg-default:focus{
+    color: #20a0ff;
+    border-color: #20a0ff;
+    background-color: #fff;
+}
+
+.cyg-success{
+    color: #fff;
+    border-color: #13ce66;
+    background-color: #13ce66;
+}
+
+.cyg-success:hover,.cyg-success:focus{
+    border-color: #42d885;
+    background: #42d885;
+}
+
+.cyg-warn{
+    color: #fff;
+    border-color: #f7ba2a;
+    background-color: #f7ba2a;
+}
+.cyg-warn:hover,.cyg-warn:focus{
+    border-color: #f9c855;
+    background: #f9c855;
+}
+.cyg-danger{
+    color: #fff;
+    border-color: #ff4949;
+    background-color: #ff4949;
+}
+.cyg-danger:hover,.cyg-danger:focus{
+    border-color: #ff6d6d;
+    background: #ff6d6d;
+}
+.cyg-info{
+    color: #fff;
+    border-color: #7b72e9;
+    background-color: #7b72e9;
+}
+.cyg-info:hover,.cyg-info:focus{
+    border-color: #a49ef0;
+    background-color: #a49ef0;
+}
+.cyg-primary{
+    color: #fff;
+    border-color: #a5de37;
+    background-color: #a5de37;
+}
+.cyg-primary:hover,.cyg-primary:focus{
+    border-color: #b9e563;
+    background-color: #b9e563;
+}
+/********* button end   ***********/
+
+/********* badge start   ***********/
+.cyg-badge{
+	position: relative;
+	vertical-align: middle;
+	display: inline-block;
+	margin: 10px 12px 0 0;	
+}
+.cyg-badge > button{
+	display: inline-block;
+	line-height: 1;
+	white-space: nowrap;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #bfcbd9;
+	color: #1f2d3d;
+	-webkit-appearance: none;
+	text-align: center;
+	box-sizing: border-box;
+	outline: none;
+	margin: 0;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	padding: 7px 9px;
+	font-size: 12px;
+	border-radius: 4px;
+}
+.cyg-badge > button:hover,.cyg-badge > button:focus{
+	color: #20a0ff;
+	border-color: #20a0ff;
+}
+.cyg-badge > sup {
+	background-color: #ff4949;
+	border-radius: 10px;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 6px;
+	text-align: center;
+	white-space: nowrap;
+	border: 1px solid #fff;
+	top: -10px;
+	left:30px;
+	position: absolute;
+
+/********* button end   ***********/
+
+
+/********* select start ***********/
+.cyg-select{
+    position: relative;
+}
+.cyg-select-div{
+    font-size: 14px;
+    width: 240px;
+    position: relative;
+    border: 1px solid #eaeefb; 
+    border-radius: 4px;
+    transition: .2s;
+}
+.cyg-select-div:hover{
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6) 0 2px 4px 0 rgba(232, 237, 250, .5);
+    border: 1px solid #1F2D3D;
+}
+.cyg-select-input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #bfcbd9;;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    display: inline-block;
+    font-size: inherit;
+    height: 36px;
+    display: block;
+    line-height: 1;
+    outline: none;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+    cursor: pointer;
+}
+.cyg-select-icon{
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #bfcbd9;
+    transition: transform .3s;
+/*    transform: translateY(-50%) rotate(180deg);*/
+    top: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 12px;
+    top: 16px;
+}
+.cyg-select-dropdown{
+    max-height: 274px;
+    overflow: auto;
+    z-index: 8888;
+    position: absolute;
+    border: 1px solid #d1dbe5;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.04);
+    box-sizing: border-box;
+    margin: 5px 0;
+    min-width: 240px;
+    transform-origin: center top 0px;
+    top: 40px;
+    left: 0px;
+}
+.cyg-select-ul{
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.cyg-select-li{
+    font-size: 14px;
+    padding: 8px 10px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #48576a;
+    height: 36px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.cyg-select-li:hover{
+    background-color: #e4e8f1;
+}
+.cyg-select-li:selected{
+    color: #fff;
+    background-color: #20a0ff;
+}
+
+
+
+
+
+/********* select end   ***********/
+
+
+
+
+/************************************************
+  * messageBox component
+ ************************************************/
+/********* messageBox start   ***********/
+.cyg-message-box-shadow{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: .5;
+	background: #000;
+	z-index: 9990;
+}
+
+.cyg-message-box-wrap{
+    position: fixed;
+    z-index: 9994;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    text-align: center;
+}
+.cyg-message-box-wrap:after{
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    content: '';
+    vertical-align: middle;
+}
+.cyg-message-box{
+	text-align: left;
+	display: inline-block;
+	vertical-align: 0;
+	background-color: #fff;
+	border-radius: 3px;
+	font-size: 16px;
+	-webkit-user-select: none;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.cyg-message-box-header{
+	position: relative;
+	padding: 20px 20px 0;
+}
+.cyg-message-box-title{
+	padding-left: 0;
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 700;
+	height: 18px;
+	color: #333;
+}
+.cyg-message-box-close{
+	display: inline-block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    line-height: 20px;
+    text-align: center;
+	font-size: 30px;
+	cursor: pointer;
+    line-height: 1;
+    color: #000;
+    opacity: .2;
+    text-shadow: 0 1px 0 #fff;
+}
+.cyg-message-box-close:hover{
+	color:#20a0ff;
+	 opacity: 1;
+}
+.cyg-message-box-content{
+	padding: 30px 20px;
+	color: #48576a;
+	font-size: 14px;
+	position: relative;
+}
+.cyg-message-box-inputOuter{
+	padding-top: 15px;
+}
+.cyg-message-box-input{
+	position: relative;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+}
+.cyg-message-box-input > input{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	background-image: none;
+	border-radius: 4px;
+	border: 1px solid #bfcbd9;
+	box-sizing: border-box;
+	color: #1f2d3d;
+	display: block;
+	font-size: inherit;
+	height: 36px;
+	line-height: 1;
+	outline: none;
+	padding: 3px 10px;
+	transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+	width: 100%;
+}
+.cyg-message-box-input > input.invalid{
+	border-color: #ff4949;
+}
+.cyg-message-box-errormsg{
+	color: #ff4949;
+    font-size: 12px;
+    min-height: 18px;
+    margin-top: 2px;
+    visibility: hidden;
+}
+.cyg-message-box-btns{
+	padding: 10px 20px 15px;
+	text-align: right;
+}
+.cyg-message-box-btns > button:last-child{
+	margin-left:20px;
+}
+/********* messageBox end   ***********/
+
+/********* message  start   ***********/
+.cyg-message{
+    padding: 10px 12px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    position: fixed;
+    left: 50%;
+    top: -40px;
+    z-index: 2000;
+    transition: opacity .4s, top .4s ease-in-out;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
+    opacity: 0;
+
+}
+.cyg-message-animate{
+	 opacity: 1;
+	 top:30px;
+}
+.cyg-message > img{
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.cyg-message-group{
+	margin-left: 38px;
+    position: relative;
+    height: 20px;
+}
+.cyg-message-group > p{
+	font-size: 14px;
+	line-height: 20px;
+	margin: 0 34px 0 0;
+	white-space: nowrap;
+	color: #8391a5;
+	text-align: justify;
+	vertical-align: middle;
+}
+/********* message  end   ***********/
+
+/********* notify  start   ***********/
+.cyg-message-notify{
+	width: 330px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
+    transition: opacity .3s, right .3s,top .4s;
+    overflow: hidden;
+}
+.cyg-message-notify:
+.cyg-message-notify-title{
+	font-weight: 400;
+	font-size: 16px;
+	color: #1f2d3d;
+}
+.cyg-message-notify-content{
+	font-size: 14px;
+	line-height: 21px;
+	margin: 20px 0 0;
+	text-align: justify;
+}
+/********* notify  end   ***********/
